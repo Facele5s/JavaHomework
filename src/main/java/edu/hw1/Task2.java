@@ -1,23 +1,7 @@
 package edu.hw1;
 
-import java.util.Scanner;
-import org.apache.logging.log4j.LogManager;
-
 public class Task2 {
-    private final static org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger();
-
-    private final static int DEC = 10;
-
-    @SuppressWarnings("uncommentedmain")
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        LOGGER.info("Введите число: ");
-        int n = sc.nextInt();
-        LOGGER.info(countDigits(n));
-
-        sc.close();
-    }
+    private final static int DECIMAL_SYSTEM_BASE = 10;
 
     public static int countDigits(int p) {
         int result = 0;
@@ -25,7 +9,8 @@ public class Task2 {
 
         while (n > 0) {
             result++;
-            n /= DEC;
+            // Делим число на основание системы счисления, чтобы отбросить последнюю цифру
+            n /= DECIMAL_SYSTEM_BASE;
         }
 
         if (result == 0) {
@@ -36,5 +21,4 @@ public class Task2 {
 
     private Task2() {
     }
-
 }

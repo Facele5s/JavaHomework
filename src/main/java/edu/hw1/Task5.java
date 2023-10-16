@@ -1,32 +1,17 @@
 package edu.hw1;
 
-import java.util.Scanner;
-import org.apache.logging.log4j.LogManager;
-
 public class Task5 {
-    private final static org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger();
-    private final static int DEC = 10;
-    private final static int HUNDRED = 100;
-    private final static int MAX_ONEDIGIT_VALUE = 9;
-
-    @SuppressWarnings("uncommentedmain")
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        LOGGER.info("Введите число: ");
-        int n = sc.nextInt();
-        LOGGER.info(isPalindromeDescendant(n));
-
-        sc.close();
-    }
+    private final static int ONE_DIGIT_SPACER = 10;
+    private final static int TWO_DIGIT_SPACER = 100;
+    private final static int MAX_ONE_DIGIT_VALUE = 9;
 
     public static boolean isPalindromeDescendant(int p) {
         int n = Math.abs(p);
-        if (n < DEC) {
+        if (n <= MAX_ONE_DIGIT_VALUE) {
             return true; //Все однозначные числа являются палиндромами
         }
 
-        while (n > DEC) {
+        while (n > MAX_ONE_DIGIT_VALUE) {
             if (isPalindrome(n)) {
                 return true;
             } else {
@@ -52,6 +37,7 @@ public class Task5 {
     private static int getDescendant(int n) {
         int descendant = 0;
         String s = Integer.toString(n);
+        // Если число имеет нечётную длину, припишем для удобства 0
         if (s.length() % 2 == 1) {
             s = s + "0";
         }
@@ -61,10 +47,12 @@ public class Task5 {
             pair += Integer.parseInt(Character.toString(s.charAt(i)));
             pair += Integer.parseInt(Character.toString(s.charAt(i - 1)));
 
-            if (pair > MAX_ONEDIGIT_VALUE) {
-                descendant *= HUNDRED;
+            if (pair > ONE_DIGIT_SPACER) {
+                // Умножаем число на 100, если нужно приписать две цифры
+                descendant *= TWO_DIGIT_SPACER;
             } else {
-                descendant *= DEC;
+                // Умножаем число на 10, если нужно приписать одну цифру
+                descendant *= ONE_DIGIT_SPACER;
             }
             descendant += pair;
         }
@@ -74,5 +62,4 @@ public class Task5 {
 
     private Task5() {
     }
-
 }

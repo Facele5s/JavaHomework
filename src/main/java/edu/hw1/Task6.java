@@ -3,44 +3,24 @@ package edu.hw1;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Scanner;
-import org.apache.logging.log4j.LogManager;
 
 public class Task6 {
-    private final static org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger();
-    private final static int K = 6174;
-    private final static int DEC = 10;
-    private final static int THOUSAND = 1000;
-    private final static int MAX_FOURDIGIT_VALUE = 9999;
-
-    @SuppressWarnings("uncommentedmain")
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        LOGGER.info("Введите число: ");
-        int n = sc.nextInt();
-        LOGGER.info(countK(n));
-
-        sc.close();
-    }
+    private final static int KAPREKAR_CONSTANT = 6174;
+    private final static int DECIMAL_SYSTEM_BASE = 10;
+    private final static int MIN_FOUR_DIGIT_VALUE = 1000;
+    private final static int MAX_FOUR_DIGIT_VALUE = 9999;
 
     public static int countK(int p) {
         int n = p;
 
-        if (n < THOUSAND) {
-            return -1;
-        }
-        if (n > MAX_FOURDIGIT_VALUE) {
-            return -1;
-        }
-        if (!checkNotEqualDigits(n)) {
+        if (n < MIN_FOUR_DIGIT_VALUE || n > MAX_FOUR_DIGIT_VALUE || !checkNotEqualDigits(n)) {
             return -1;
         }
 
-        int count = 0;
+        int stepsCount = 0;
         List<Integer> list;
 
-        while (n != K) {
+        while (n != KAPREKAR_CONSTANT) {
             list = getDigits(n);
 
             Collections.sort(list);
@@ -50,23 +30,24 @@ public class Task6 {
             int bigger = buildNumber(list);
 
             n = bigger - smaller;
-            count++;
+            stepsCount++;
         }
 
-        return count;
+        return stepsCount;
     }
 
     private static boolean checkNotEqualDigits(int p) {
         int n = p;
 
-        int digit = n % DEC;
-        n /= DEC;
+        int digit = n % DECIMAL_SYSTEM_BASE;
+        n /= DECIMAL_SYSTEM_BASE;
 
         while (n > 0) {
-            if (n % DEC != digit) {
+            if (n % DECIMAL_SYSTEM_BASE != digit) {
                 return true;
             }
-            n /= DEC;
+            // Делим число на основание системы счисления, чтобы отбросить последнюю цифру
+            n /= DECIMAL_SYSTEM_BASE;
         }
 
         return false;
@@ -76,10 +57,10 @@ public class Task6 {
         int result = 0;
 
         for (int n : list) {
+            // Умножаем число на основание системы счисления, чтобы потом приписпать цифру
+            result *= DECIMAL_SYSTEM_BASE;
             result += n;
-            result *= DEC;
         }
-        result /= DEC;
 
         return result;
     }
@@ -90,8 +71,9 @@ public class Task6 {
         List<Integer> list = new ArrayList<>();
 
         while (n > 0) {
-            list.add(n % DEC);
-            n /= DEC;
+            list.add(n % DECIMAL_SYSTEM_BASE);
+            // Делим число на основание системы счисления, чтобы отбросить последнюю цифру
+            n /= DECIMAL_SYSTEM_BASE;
         }
 
         return list;
@@ -99,5 +81,4 @@ public class Task6 {
 
     private Task6() {
     }
-
 }

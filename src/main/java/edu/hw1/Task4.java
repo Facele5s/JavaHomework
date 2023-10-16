@@ -1,22 +1,6 @@
 package edu.hw1;
 
-import java.util.Scanner;
-import org.apache.logging.log4j.LogManager;
-
 public class Task4 {
-    private final static org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger();
-
-    @SuppressWarnings("uncommentedmain")
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        LOGGER.info("Введите строку: ");
-        String str = sc.nextLine();
-        LOGGER.info(fixString(str));
-
-        sc.close();
-    }
-
     public static String fixString(String str) {
         if (str == null) {
             return null;
@@ -42,5 +26,4 @@ public class Task4 {
 
     private Task4() {
     }
-
 }

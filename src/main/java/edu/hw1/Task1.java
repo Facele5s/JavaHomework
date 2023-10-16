@@ -1,22 +1,7 @@
 package edu.hw1;
 
-import java.util.Scanner;
-import org.apache.logging.log4j.LogManager;
-
 public class Task1 {
-    private final static org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger();
     private final static int SEC_IN_MIN = 60;
-
-    @SuppressWarnings("uncommentedmain")
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        LOGGER.info("Введите время: ");
-        String time = sc.nextLine();
-        LOGGER.info(minutesToSeconds(time));
-
-        sc.close();
-    }
 
     public static int minutesToSeconds(String time) {
         int result = -1;
@@ -38,6 +23,8 @@ public class Task1 {
     private static boolean checkInput(String time) {
         boolean checkResult = true;
         boolean hasColon = false;
+        //Я хотел убрать инициализацию hasColon, но если сделать так для переменной внутри метода,
+        // то начинает ругаться компилятор
 
         if (time == null) {
             return false;
@@ -70,5 +57,4 @@ public class Task1 {
 
     private Task1() {
     }
-
 }

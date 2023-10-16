@@ -1,36 +1,6 @@
 package edu.hw1;
 
-import java.util.Scanner;
-import org.apache.logging.log4j.LogManager;
-
 public class Task3 {
-    private final static org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger();
-
-    @SuppressWarnings("uncommentedmain")
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        LOGGER.info("Введите длину первого массива: ");
-        int length1 = sc.nextInt();
-        LOGGER.info("Введите числа первого массива: ");
-        int[] arr1 = new int[length1];
-        for (int i = 0; i < length1; i++) {
-            arr1[i] = sc.nextInt();
-        }
-
-        LOGGER.info("Введите длину второго массива: ");
-        int length2 = sc.nextInt();
-        LOGGER.info("Введите числа второго массива: ");
-        int[] arr2 = new int[length2];
-        for (int i = 0; i < length2; i++) {
-            arr2[i] = sc.nextInt();
-        }
-
-        LOGGER.info(isNestable(arr1, arr2));
-
-        sc.close();
-    }
-
     public static boolean isNestable(int[] arr1, int[] arr2) {
         if (arr1 == null || arr2 == null) {
             return false;
@@ -66,5 +36,4 @@ public class Task3 {
 
     private Task3() {
     }
-
 }

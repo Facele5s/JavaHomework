@@ -3,67 +3,78 @@ package edu.hw1;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static edu.hw1.Task3.isNestable;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class Task3Test {
     @Test
-    @DisplayName("Правильность результата")
+    @DisplayName("Проверка на правильность работы алгоритма")
     public void testCorrect() {
-        int[] arr1 = new int[] {1, 2, 3, 4}; //True
+        //Входные данные: arr1: [1, 2, 3, 4], arr2: [0, 6]
+        //Ожидаемый результат: True
+        //Пояснение: Массив arr1 может быть вложен в массив arr2
+        int[] arr1 = new int[] {1, 2, 3, 4};
         int[] arr2 = new int[] {0, 6};
-        boolean actual = isNestable(arr1, arr2);
-        boolean expected = true;
-        assertEquals(expected, actual);
+        assertTrue(isNestable(arr1, arr2));
 
-        arr1 = new int[] {3, 1}; //True
+        //Входные данные: arr1: [3, 1], arr2: [4, 0]
+        //Ожидаемый результат: True
+        //Пояснение: Массив arr1 может быть вложен в массив arr2
+        arr1 = new int[] {3, 1};
         arr2 = new int[] {4, 0};
-        actual = isNestable(arr1, arr2);
-        assertEquals(expected, actual);
+        assertTrue(isNestable(arr1, arr2));
 
-        arr1 = new int[] {9, 9, 8};  //False
+        //Входные данные: arr1: [9, 9, 8], arr2: [8, 9]
+        //Ожидаемый результат: False
+        //Пояснение: Массив arr1 не может быть вложен в массив arr2
+        arr1 = new int[] {9, 9, 8};
         arr2 = new int[] {8, 9};
-        actual = isNestable(arr1, arr2);
-        expected = false;
-        assertEquals(expected, actual);
+        assertFalse(isNestable(arr1, arr2));
 
-        arr1 = new int[] {1, 2, 3, 4};   //False
+        //Входные данные: arr1: [1, 2, 3, 4], arr2: [2, 3]
+        //Ожидаемый результат: False
+        //Пояснение: Массив arr1 не может быть вложен в массив arr2
+        arr1 = new int[] {1, 2, 3, 4};
         arr2 = new int[] {2, 3};
-        actual = isNestable(arr1, arr2);
-        assertEquals(expected, actual);
+        assertFalse(isNestable(arr1, arr2));
 
-        arr1 = new int[] {0, 0, 0};  //False
+        //Входные данные: arr1: [0, 0, 0], arr2: [1, 2, 3]
+        //Ожидаемый результат: False
+        //Пояснение: Массив arr1 не может быть вложен в массив arr2
+        arr1 = new int[] {0, 0, 0};
         arr2 = new int[] {1, 2, 3};
-        actual = isNestable(arr1, arr2);
-        assertEquals(expected, actual);
+        assertFalse(isNestable(arr1, arr2));
 
-        arr1 = new int[] {0, 6}; //False
+        //Входные данные: arr1: [0, 6], arr2: [1, 2, 3, 4]
+        //Ожидаемый результат: False
+        //Пояснение: Массив arr1 не может быть вложен в массив arr2
+        arr1 = new int[] {0, 6};
         arr2 = new int[] {1, 2, 3, 4};
-        actual = isNestable(arr1, arr2);
-        assertEquals(expected, actual);
-
-        arr1 = new int[0];  //False
-        arr2 = new int[0];
-        actual = isNestable(arr1, arr2);
-        assertEquals(expected, actual);
+        assertFalse(isNestable(arr1, arr2));
     }
 
     @Test
     @DisplayName("Проверка на пустой массив")
     public void testEmptyArray() {
-        int[] arr1 = new int[0];    //False
+        //Входные данные: arr1: [], arr2: [0, 6]
+        //Ожидаемый результат: False
+        //Пояснение: Массив arr1 пустой
+        int[] arr1 = new int[0];
         int[] arr2 = new int[] {0, 6};
-        boolean actual = isNestable(arr1, arr2);
-        boolean expected = false;
-        assertEquals(expected, actual);
+        assertFalse(isNestable(arr1, arr2));
 
-        arr1 = new int[] {1, 2, 3, 4};   //False
+        //Входные данные: arr1: [1, 2, 3, 4], arr2: []
+        //Ожидаемый результат: False
+        //Пояснение: Массив arr2 пустой
+        arr1 = new int[] {1, 2, 3, 4};
         arr2 = new int[0];
-        actual = isNestable(arr1, arr2);
-        assertEquals(expected, actual);
+        assertFalse(isNestable(arr1, arr2));
 
-        arr1 = new int[0];  //False
-        actual = isNestable(arr1, arr2);
-        assertEquals(expected, actual);
+        //Входные данные: arr1: [], arr2: []
+        //Ожидаемый результат: False
+        //Пояснение: Массивы пустые
+        arr1 = new int[0];
+        assertFalse(isNestable(arr1, arr2));
     }
 
 }

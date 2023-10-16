@@ -3,13 +3,16 @@ package edu.hw1;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static edu.hw1.Task8.knightBoardCapture;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class Task8Test {
     @Test
-    @DisplayName("Правильность результата")
+    @DisplayName("Проверка на правильность работы алгоритма")
     public void testCorrect() {
-        int[][] board = new int[][] {   //False
+        //Ожидаемый результат: False
+        //Пояснение: На доске присутствуют кони, способные захватить других коней
+        int[][] board = new int[][] {
             {0, 0, 0, 0, 1, 0, 0, 0},
             {0, 0, 0, 0, 0, 1, 0, 0},
             {0, 0, 0, 1, 0, 0, 0, 0},
@@ -19,11 +22,11 @@ public class Task8Test {
             {0, 0, 0, 0, 0, 1, 0, 0},
             {1, 0, 0, 0, 0, 0, 0, 0}
         };
-        boolean actual = knightBoardCapture(board);
-        boolean expected = false;
-        assertEquals(expected, actual);
+        assertFalse(knightBoardCapture(board));
 
-        board = new int[][] {   //False
+        //Ожидаемый результат: False
+        //Пояснение: На доске присутствуют кони, способные захватить других коней
+        board = new int[][] {
             {1, 0, 1, 0, 1, 0, 1, 0},
             {0, 1, 0, 1, 0, 1, 0, 1},
             {0, 0, 0, 0, 1, 0, 1, 0},
@@ -33,10 +36,11 @@ public class Task8Test {
             {1, 0, 0, 0, 1, 0, 1, 0},
             {0, 0, 0, 1, 0, 1, 0, 1}
         };
-        actual = knightBoardCapture(board);
-        assertEquals(expected, actual);
+        assertFalse(knightBoardCapture(board));
 
-        board = new int[][] {   //False
+        //Ожидаемый результат: False
+        //Пояснение: На доске присутствуют кони, способные захватить других коней
+        board = new int[][] {
             {1, 1, 1, 1, 1, 1, 1, 1},
             {1, 0, 0, 0, 0, 0, 0, 1},
             {1, 0, 0, 0, 0, 0, 0, 1},
@@ -46,10 +50,11 @@ public class Task8Test {
             {1, 0, 0, 0, 0, 0, 0, 1},
             {1, 1, 1, 1, 1, 1, 1, 1}
         };
-        actual = knightBoardCapture(board);
-        assertEquals(expected, actual);
+        assertFalse(knightBoardCapture(board));
 
-        board = new int[][] {   //True
+        //Ожидаемый результат: True
+        //Пояснение: На доске нет коней, которые бы могли захватить других коней
+        board = new int[][] {
             {0, 0, 0, 1, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0},
             {0, 1, 0, 0, 0, 1, 0, 0},
@@ -59,11 +64,11 @@ public class Task8Test {
             {0, 1, 0, 0, 0, 0, 0, 1},
             {0, 0, 0, 0, 1, 0, 0, 0}
         };
-        actual = knightBoardCapture(board);
-        expected = true;
-        assertEquals(expected, actual);
+        assertTrue(knightBoardCapture(board));
 
-        board = new int[][] {   //True
+        //Ожидаемый результат: True
+        //Пояснение: На доске нет коней, которые бы могли захватить других коней
+        board = new int[][] {
             {1, 0, 1, 0, 1, 0, 1, 0},
             {0, 1, 0, 1, 0, 1, 0, 1},
             {1, 0, 1, 0, 1, 0, 1, 0},
@@ -73,14 +78,15 @@ public class Task8Test {
             {1, 0, 1, 0, 1, 0, 1, 0},
             {0, 1, 0, 1, 0, 1, 0, 1}
         };
-        actual = knightBoardCapture(board);
-        assertEquals(expected, actual);
+        assertTrue(knightBoardCapture(board));
     }
 
     @Test
-    @DisplayName("Кони везде")
+    @DisplayName("Проверка на заполненную доску")
     public void testKnightsEveryWhere() {
-        int[][] board = new int[][] {   //False
+        //Ожидаемый результат: False
+        //Пояснение: Доска заполнена конями. Многие из них могут захватить кого-либо
+        int[][] board = new int[][] {
             {1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1},
@@ -90,15 +96,15 @@ public class Task8Test {
             {1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1}
         };
-        boolean actual = knightBoardCapture(board);
-        boolean expected = false;
-        assertEquals(expected, actual);
+        assertFalse(knightBoardCapture(board));
     }
 
     @Test
-    @DisplayName("Пустая доска")
+    @DisplayName("Проверка на пустую доску")
     public void testBlankBoard() {
-        int[][] board = new int[][] {   //True
+        //Ожидаемый результат: True
+        //Пояснение: На доске нет коней. Никто не может никого захватить.
+        int[][] board = new int[][] {
             {0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0},
@@ -108,9 +114,6 @@ public class Task8Test {
             {0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0}
         };
-        boolean actual = knightBoardCapture(board);
-        boolean expected = true;
-        assertEquals(expected, actual);
-        
+        assertTrue(knightBoardCapture(board));
     }
 }
