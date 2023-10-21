@@ -1,5 +1,10 @@
 package edu.project1;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -7,7 +12,8 @@ import org.apache.logging.log4j.Logger;
 public class GameController implements GameControls {
     private final HangmanGame session;
     private final static Logger LOGGER = LogManager.getLogger();
-    private final Scanner sc = new Scanner(System.in);
+    private Scanner sc;
+    private InputStream inputStream;
 
     private final String commandSTOP = "/stop";
     private final String commandYES = "/yes";
@@ -15,14 +21,17 @@ public class GameController implements GameControls {
     private final String startNewGame = "Начать новую игру? (Да/Нет)";
     private final String typeOneLetter = "Введите только одну букву:";
 
-    public GameController(HangmanGame session) {
+    public GameController(HangmanGame session, InputStream inputStream) {
         this.session = session;
+        this.inputStream = inputStream;
     }
 
     @Override
     public void startGame() {
-        session.setGameState(GameStates.GAME_PROCESS);
+        sc = new Scanner(System.in);
+
         session.setWord(Dictionary.getGameWord());
+        session.initSession();
 
         LOGGER.info("Игра началась!");
         LOGGER.info("Чтобы сдаться введите команду /stop \n");
@@ -34,6 +43,8 @@ public class GameController implements GameControls {
 
     @Override
     public void playGame() {
+        session.setGameState(GameStates.GAME_PROCESS);
+
         while (session.getGameState() == GameStates.GAME_PROCESS) {
             LOGGER.info("Введите букву:");
             String inputString = readInput();
@@ -44,6 +55,59 @@ public class GameController implements GameControls {
                 stopGame();
             }
         }
+    }
+
+    @Override
+    public List<String> testGame(String word, String inputs, ObservingParams param) {
+        List<String> response = new ArrayList<>();
+        session.setGameState(GameStates.GAME_PROCESS);
+        session.setWord(word);
+        session.initSession();
+        inputStream = new ByteArrayInputStream(inputs.getBytes());
+        sc = new Scanner(inputStream);
+
+        for (int i = 0; i < inputs.split("\n").length; i++) {
+            String inputString = readInput();
+
+            if (!inputString.equalsIgnoreCase(commandSTOP)) {
+                makeAttempt(inputString.charAt(0));
+            } else {
+                stopGame();
+            }
+
+            switch (param) {
+                case CURRENT_WORD_STATE: {
+                    response.add(Arrays.toString(session.getHiddenSymbols()));
+                    break;
+                }
+                case NUMBER_OF_ATTEMPTS: {
+                    response.add(Integer.toString(session.getNumberOfAttempts()));
+                    break;
+                }
+                case NUMBER_OF_REMAINING_CHARS: {
+                    response.add(Integer.toString(session.getNumberOfRemainingChars()));
+                    break;
+                }
+                case USED_SYMBOLS: {
+                    response.add(session.getUsedChars().toString());
+                    break;
+                }
+                case GAME_STATE: {
+                    response.add(session.getGameState().toString());
+                    break;
+                }
+                case WRONG_INPUT: {
+                    response.add(" ");
+                    break;
+                }
+                default: {
+                    break;
+                }
+            }
+        }
+
+        stopGame();
+        return response;
     }
 
     @Override
@@ -60,19 +124,21 @@ public class GameController implements GameControls {
         LOGGER.info("Вы выиграли! Было загадано слово " + session.getWord());
         LOGGER.info(startNewGame);
 
-        String inputString = readInput();
+        if (sc.hasNextLine()) {
+            String inputString = readInput();
 
-        switch (inputString) {
-            case commandYES: {
-                startGame();
-                break;
-            }
-            case commandSTOP, commandNO: {
-                stopGame();
-                break;
-            }
-            default: {
-                break;
+            switch (inputString) {
+                case commandYES: {
+                    startGame();
+                    break;
+                }
+                case commandSTOP, commandNO: {
+                    stopGame();
+                    break;
+                }
+                default: {
+                    break;
+                }
             }
         }
     }
@@ -84,26 +150,23 @@ public class GameController implements GameControls {
         LOGGER.info("Вы проиграли! Было загадано слово " + session.getWord());
         LOGGER.info(startNewGame);
 
-        String inputString = readInput();
+        if (sc.hasNextLine()) {
+            String inputString = readInput();
 
-        switch (inputString) {
-            case commandYES: {
-                startGame();
-                break;
-            }
-            case commandSTOP, commandNO: {
-                stopGame();
-                break;
-            }
-            default: {
-                break;
+            switch (inputString) {
+                case commandYES: {
+                    startGame();
+                    break;
+                }
+                case commandSTOP, commandNO: {
+                    stopGame();
+                    break;
+                }
+                default: {
+                    break;
+                }
             }
         }
-    }
-
-    @Override
-    public void startTest() {
-        session.setGameState(GameStates.TESTING);
     }
 
     @Override
@@ -137,13 +200,11 @@ public class GameController implements GameControls {
     public String readInput() {
         String str;
 
-        while (true) {
+        while (sc.hasNextLine()) {
             str = sc.nextLine();
 
-            if (str.isEmpty()) {
-                LOGGER.info("Вы ничего не ввели. Попробуйте ещё раз:");
-            } else if (str.equalsIgnoreCase(commandSTOP)) {
-                return commandSTOP;
+            if (str.isEmpty() || str.equalsIgnoreCase(commandSTOP)) {
+                break;
             } else if (str.equalsIgnoreCase("да")) {
                 if (session.getGameState() == GameStates.WAITING) {
                     return commandYES;
@@ -164,5 +225,7 @@ public class GameController implements GameControls {
                 return str;
             }
         }
+
+        return commandSTOP;
     }
 }

@@ -1,24 +1,27 @@
 package edu.project1;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class HangmanGame {
     private GameStates gameState = GameStates.WAITING;
     private String word;
     private char[] hiddenSymbols;
-    @SuppressWarnings("MagicNumber")
-    private int numberOfAttempts = 7;
+    private final int defaultNumberOfAttempts = 7;
+    private int numberOfAttempts;
     private int numberOfRemainingChars;
-    private final Set<Character> usedChars = new HashSet<>();
+    private final Set<Character> usedChars = new TreeSet<>();
 
     public void setWord(String word) {
         this.word = word;
         hiddenSymbols = new char[word.length()];
         Arrays.fill(hiddenSymbols, '*');
         numberOfRemainingChars = hiddenSymbols.length;
+    }
 
+    public void initSession() {
+        numberOfAttempts = defaultNumberOfAttempts;
         usedChars.clear();
     }
 
@@ -28,6 +31,10 @@ public class HangmanGame {
 
     public String getWord() {
         return word;
+    }
+
+    public Set<Character> getUsedChars() {
+        return usedChars;
     }
 
     public GameStates getGameState() {
