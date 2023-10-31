@@ -5,10 +5,11 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class HangmanGame {
+    private static final int DEFAULT_NUMBER_OF_ATTEMPTS = 7;
+
     private GameStates gameState = GameStates.WAITING;
     private String word;
     private char[] hiddenSymbols;
-    private final int defaultNumberOfAttempts = 7;
     private int numberOfAttempts;
     private int numberOfRemainingChars;
     private final Set<Character> usedChars = new TreeSet<>();
@@ -21,7 +22,7 @@ public class HangmanGame {
     }
 
     public void initSession() {
-        numberOfAttempts = defaultNumberOfAttempts;
+        numberOfAttempts = DEFAULT_NUMBER_OF_ATTEMPTS;
         usedChars.clear();
     }
 

@@ -16,7 +16,7 @@ public class NumberOfAttemptsTest {
 
         ByteArrayInputStream inputStream = new ByteArrayInputStream(inp.getBytes());
         HangmanGame session = new HangmanGame();
-        GameController gameController = new GameController(session, inputStream);
+        GameController gameController = new GameController(session, inputStream, null);
 
         String[] outputs = new String[]{"6", "5", "4"};
         List<String> expectedResults = Arrays.asList(outputs);
@@ -33,7 +33,7 @@ public class NumberOfAttemptsTest {
 
         ByteArrayInputStream inputStream = new ByteArrayInputStream(inp.getBytes());
         HangmanGame session = new HangmanGame();
-        GameController gameController = new GameController(session, inputStream);
+        GameController gameController = new GameController(session, inputStream, null);
 
         String[] outputs = new String[]{"7", "7", "7", "7"};
         List<String> expectedResults = Arrays.asList(outputs);

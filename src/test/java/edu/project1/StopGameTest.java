@@ -16,7 +16,7 @@ public class StopGameTest {
 
         ByteArrayInputStream inputStream = new ByteArrayInputStream(inp.getBytes());
         HangmanGame session = new HangmanGame();
-        GameController gameController = new GameController(session, inputStream);
+        GameController gameController = new GameController(session, inputStream, null);
 
         String[] outputs = new String[]{"STOP"};
         List<String> expectedResults = Arrays.asList(outputs);
@@ -33,7 +33,7 @@ public class StopGameTest {
 
         ByteArrayInputStream inputStream = new ByteArrayInputStream(inp.getBytes());
         HangmanGame session = new HangmanGame();
-        GameController gameController = new GameController(session, inputStream);
+        GameController gameController = new GameController(session, inputStream, null);
 
         String[] outputs = new String[]{"GAME_PROCESS", "GAME_PROCESS", "STOP", "STOP"};
         List<String> expectedResults = Arrays.asList(outputs);

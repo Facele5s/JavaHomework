@@ -10,27 +10,29 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class GameController implements GameControls {
-    private final HangmanGame session;
     private final static Logger LOGGER = LogManager.getLogger();
-    private Scanner sc;
+    private static final String COMMAND_STOP = "/stop";
+    private static final String COMMAND_YES = "/yes";
+    private static final String COMMAND_NO = "/no";
+    private static final String START_NEW_GAME = "Начать новую игру? (Да/Нет)";
+    private static final String TYPE_ONE_LETTER = "Введите только одну букву:";
+
+    private final Dictionary dictionary;
+    private final HangmanGame session;
+    private Scanner scanner;
     private InputStream inputStream;
 
-    private final String commandSTOP = "/stop";
-    private final String commandYES = "/yes";
-    private final String commandNO = "/no";
-    private final String startNewGame = "Начать новую игру? (Да/Нет)";
-    private final String typeOneLetter = "Введите только одну букву:";
-
-    public GameController(HangmanGame session, InputStream inputStream) {
+    public GameController(HangmanGame session, InputStream inputStream, Dictionary dictionary) {
         this.session = session;
         this.inputStream = inputStream;
+        this.dictionary = dictionary;
     }
 
     @Override
     public void startGame() {
-        sc = new Scanner(System.in);
+        scanner = new Scanner(System.in);
 
-        session.setWord(Dictionary.getGameWord());
+        session.setWord(dictionary.getGameWord());
         session.initSession();
 
         LOGGER.info("Игра началась!");
@@ -49,7 +51,7 @@ public class GameController implements GameControls {
             LOGGER.info("Введите букву:");
             String inputString = readInput();
 
-            if (!inputString.equalsIgnoreCase(commandSTOP)) {
+            if (!inputString.equalsIgnoreCase(COMMAND_STOP)) {
                 makeAttempt(inputString.charAt(0));
             } else {
                 stopGame();
@@ -64,12 +66,12 @@ public class GameController implements GameControls {
         session.setWord(word);
         session.initSession();
         inputStream = new ByteArrayInputStream(inputs.getBytes());
-        sc = new Scanner(inputStream);
+        scanner = new Scanner(inputStream);
 
         for (int i = 0; i < inputs.split("\n").length; i++) {
             String inputString = readInput();
 
-            if (!inputString.equalsIgnoreCase(commandSTOP)) {
+            if (!inputString.equalsIgnoreCase(COMMAND_STOP)) {
                 makeAttempt(inputString.charAt(0));
             } else {
                 stopGame();
@@ -122,17 +124,17 @@ public class GameController implements GameControls {
         session.setGameState(GameStates.WAITING);
 
         LOGGER.info("Вы выиграли! Было загадано слово " + session.getWord());
-        LOGGER.info(startNewGame);
+        LOGGER.info(START_NEW_GAME);
 
-        if (sc.hasNextLine()) {
+        if (scanner.hasNextLine()) {
             String inputString = readInput();
 
             switch (inputString) {
-                case commandYES: {
+                case COMMAND_YES: {
                     startGame();
                     break;
                 }
-                case commandSTOP, commandNO: {
+                case COMMAND_STOP, COMMAND_NO: {
                     stopGame();
                     break;
                 }
@@ -148,17 +150,17 @@ public class GameController implements GameControls {
         session.setGameState(GameStates.WAITING);
 
         LOGGER.info("Вы проиграли! Было загадано слово " + session.getWord());
-        LOGGER.info(startNewGame);
+        LOGGER.info(START_NEW_GAME);
 
-        if (sc.hasNextLine()) {
+        if (scanner.hasNextLine()) {
             String inputString = readInput();
 
             switch (inputString) {
-                case commandYES: {
+                case COMMAND_YES: {
                     startGame();
                     break;
                 }
-                case commandSTOP, commandNO: {
+                case COMMAND_STOP, COMMAND_NO: {
                     stopGame();
                     break;
                 }
@@ -200,25 +202,27 @@ public class GameController implements GameControls {
     public String readInput() {
         String str;
 
-        while (sc.hasNextLine()) {
-            str = sc.nextLine();
+        while (scanner.hasNextLine()) {
+            str = scanner.nextLine();
 
-            if (str.isEmpty() || str.equalsIgnoreCase(commandSTOP)) {
+            if (str.isEmpty() || str.equalsIgnoreCase(COMMAND_STOP)) {
                 break;
             } else if (str.equalsIgnoreCase("да")) {
+
                 if (session.getGameState() == GameStates.WAITING) {
-                    return commandYES;
-                } else {
-                    LOGGER.info(typeOneLetter);
+                    return COMMAND_YES;
                 }
+                LOGGER.info(TYPE_ONE_LETTER);
+
             } else if (str.equalsIgnoreCase("нет")) {
+
                 if (session.getGameState() == GameStates.WAITING) {
-                    return commandNO;
-                } else {
-                    LOGGER.info(typeOneLetter);
+                    return COMMAND_NO;
                 }
+                LOGGER.info(TYPE_ONE_LETTER);
+
             } else if (str.length() > 1) {
-                LOGGER.info(typeOneLetter);
+                LOGGER.info(TYPE_ONE_LETTER);
             } else if (!Character.isLetter(str.charAt(0))) {
                 LOGGER.info("Введённый вами символ не является буквой.");
             } else {
@@ -226,6 +230,6 @@ public class GameController implements GameControls {
             }
         }
 
-        return commandSTOP;
+        return COMMAND_STOP;
     }
 }
