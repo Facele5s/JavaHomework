@@ -16,7 +16,7 @@ public class GameScenariosTest {
 
         ByteArrayInputStream inputStream = new ByteArrayInputStream(inp.getBytes());
         HangmanGame session = new HangmanGame();
-        GameController gameController = new GameController(session, inputStream);
+        GameController gameController = new GameController(session, inputStream, null);
 
         String[] outputs = new String[]{"[К, *, *, *]", "[К, л, *, *]", "[К, л, ё, *]",
             "[К, л, ё, н]"};
@@ -34,7 +34,7 @@ public class GameScenariosTest {
 
         ByteArrayInputStream inputStream = new ByteArrayInputStream(inp.getBytes());
         HangmanGame session = new HangmanGame();
-        GameController gameController = new GameController(session, inputStream);
+        GameController gameController = new GameController(session, inputStream, null);
 
         String[] outputs = new String[]{"[*, *, *, *, *, *]", "[*, *, *, *, *, *]",
             "[*, *, *, *, *, *]", "[*, *, *, *, *, *]", "[*, *, *, *, *, *]",
@@ -53,7 +53,7 @@ public class GameScenariosTest {
 
         ByteArrayInputStream inputStream = new ByteArrayInputStream(inp.getBytes());
         HangmanGame session = new HangmanGame();
-        GameController gameController = new GameController(session, inputStream);
+        GameController gameController = new GameController(session, inputStream, null);
 
         String[] outputs = new String[]{"[З, *, *, *, *]", "[З, *, *, *, р]",
             "[З, *, *, *, р]", "[З, *, *, *, р]", "[З, е, *, *, р]",

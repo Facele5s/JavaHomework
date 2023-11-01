@@ -16,7 +16,7 @@ public class NumberOfSymbolsTest {
 
         ByteArrayInputStream inputStream = new ByteArrayInputStream(inp.getBytes());
         HangmanGame session = new HangmanGame();
-        GameController gameController = new GameController(session, inputStream);
+        GameController gameController = new GameController(session, inputStream, null);
 
         String[] outputs = new String[]{"3", "2", "1", "0"};
         List<String> expectedResults = Arrays.asList(outputs);
@@ -33,7 +33,7 @@ public class NumberOfSymbolsTest {
 
         ByteArrayInputStream inputStream = new ByteArrayInputStream(inp.getBytes());
         HangmanGame session = new HangmanGame();
-        GameController gameController = new GameController(session, inputStream);
+        GameController gameController = new GameController(session, inputStream, null);
 
         String[] outputs = new String[]{"4", "4", "4", "4"};
         List<String> expectedResults = Arrays.asList(outputs);
@@ -50,7 +50,7 @@ public class NumberOfSymbolsTest {
 
         ByteArrayInputStream inputStream = new ByteArrayInputStream(inp.getBytes());
         HangmanGame session = new HangmanGame();
-        GameController gameController = new GameController(session, inputStream);
+        GameController gameController = new GameController(session, inputStream, null);
 
         String[] outputs = new String[]{"[Н]", "[Н, О]", "[Г, Н, О]", "[А, Г, Н, О]",};
         List<String> expectedResults = Arrays.asList(outputs);
@@ -67,7 +67,7 @@ public class NumberOfSymbolsTest {
 
         ByteArrayInputStream inputStream = new ByteArrayInputStream(inp.getBytes());
         HangmanGame session = new HangmanGame();
-        GameController gameController = new GameController(session, inputStream);
+        GameController gameController = new GameController(session, inputStream, null);
 
         String[] outputs = new String[]{"[Н]", "[Н]", "[Н]", "[Н]"};
         List<String> expectedResults = Arrays.asList(outputs);

@@ -16,7 +16,7 @@ public class WrongInputTest {
 
         ByteArrayInputStream inputStream = new ByteArrayInputStream(inp.getBytes());
         HangmanGame session = new HangmanGame();
-        GameController gameController = new GameController(session, inputStream);
+        GameController gameController = new GameController(session, inputStream, null);
 
         String[] outputs = new String[]{" "};
         List<String> expectedResults = Arrays.asList(outputs);
@@ -33,7 +33,7 @@ public class WrongInputTest {
 
         ByteArrayInputStream inputStream = new ByteArrayInputStream(inp.getBytes());
         HangmanGame session = new HangmanGame();
-        GameController gameController = new GameController(session, inputStream);
+        GameController gameController = new GameController(session, inputStream, null);
 
         String[] outputs = new String[]{" "};
         List<String> expectedResults = Arrays.asList(outputs);
@@ -50,7 +50,7 @@ public class WrongInputTest {
 
         ByteArrayInputStream inputStream = new ByteArrayInputStream(inp.getBytes());
         HangmanGame session = new HangmanGame();
-        GameController gameController = new GameController(session, inputStream);
+        GameController gameController = new GameController(session, inputStream, null);
 
         String[] outputs = new String[]{" ", " ", " "};
         List<String> expectedResults = Arrays.asList(outputs);
