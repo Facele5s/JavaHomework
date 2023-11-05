@@ -9,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class MazeDiggerTest {
     @Test
@@ -136,12 +137,14 @@ public class MazeDiggerTest {
     public void smallMazeTest() {
         try {
             new Maze(0, 0);
+            fail();
         } catch (WrongSizeException e) {
             assertTrue(true);
         }
 
         try {
             new Maze(-2, 10);
+            fail();
         } catch (WrongSizeException e) {
             assertTrue(true);
         }
