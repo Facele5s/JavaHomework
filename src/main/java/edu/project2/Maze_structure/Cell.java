@@ -6,7 +6,6 @@ public class Cell {
     private final int x;
     private final int y;
     private boolean isDug;
-    private boolean isVisited;
     private boolean isPath;
 
     public Cell(int x, int y) {
@@ -26,20 +25,8 @@ public class Cell {
         return isDug;
     }
 
-    public boolean isVisited() {
-        return isVisited;
-    }
-
-    public boolean isPath() {
-        return isPath;
-    }
-
     public void dig() {
         isDug = true;
-    }
-
-    public void setVisited(boolean visited) {
-        isVisited = visited;
     }
 
     public void setAsPath() {

@@ -90,7 +90,7 @@ public class MazePathFinder implements PathFinder {
             if (maze.canGoToCell(x, y)) {
                 Cell cell = maze.getCell(x, y);
 
-                if (cell.isDug() && !cell.isVisited()) {
+                if (cell.isDug()) {
                     cells.add(cell);
                 }
             }

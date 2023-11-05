@@ -4,9 +4,6 @@ import edu.project2.Exceptions.WrongCellException;
 import edu.project2.Maze_structure.Maze;
 
 public class MazePrinter implements Printer {
-    private static final char WALL = '■';
-    private static final char VOID = '□';
-    private static final char PATH = '▪';
     private final Maze maze;
 
     public MazePrinter(Maze maze) {
