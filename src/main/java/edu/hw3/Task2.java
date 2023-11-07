@@ -12,42 +12,26 @@ public class Task2 {
         List<String> answer = new ArrayList<>();
 
         if (checkInput(str)) {
-            int leftBracketCount = 0;
-            int rightBracketCount = 0;
-            boolean isClusterOpened = false;
+            int brackets = 0;
             StringBuilder cluster = new StringBuilder();
 
             for (int i = 0; i < str.length(); i++) {
                 char c = str.charAt(i);
 
-                if (c == ')') {
-                    if (isClusterOpened) {
-                        rightBracketCount++;
-                        cluster.append(c);
-                    } else {
-                        answer.clear();
-                        break;
-                    }
+                if (c == '(') {
+                    brackets++;
                 } else {
-                    if (!isClusterOpened) {
-                        isClusterOpened = true;
-                    }
-                    leftBracketCount++;
-                    cluster.append(c);
+                    brackets--;
                 }
 
-                if (leftBracketCount == rightBracketCount) {
-                    leftBracketCount = 0;
-                    rightBracketCount = 0;
-                    isClusterOpened = false;
+                cluster.append(c);
+
+                if (brackets == 0) {
                     answer.add(cluster.toString());
                     cluster.setLength(0);
-                }
-
-                // Если кластер открывается на последнем символе, значит
-                // он уже не закроется
-                if (isClusterOpened && i == str.length() - 1) {
+                } else if (brackets < 0 || i == str.length() - 1) {
                     answer.clear();
+                    break;
                 }
             }
         }
