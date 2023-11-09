@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import static edu.hw4.ValidationError.beautifulCheck;
@@ -17,7 +18,13 @@ public class Task {
     }
 
     // 1. Сортировка животных по росту от маленького к большому
-    public static List<Animal> heightAscSort(List<Animal> animals) {
+    public static List<Animal> heightAscSort(List<Animal> animalsInput) {
+        if (animalsInput == null) {
+            return null;
+        }
+
+        List<Animal> animals = animalsInput.stream().filter(Objects::nonNull).toList();
+
         return animals.stream().sorted((o1, o2) -> {
             if (o1.height() > o2.height()) {
                 return 1;
@@ -29,10 +36,12 @@ public class Task {
     }
 
     // 2. Сортировка животных по весу от тяжёлого к лёгкому
-    public static List<Animal> weightDescSort(List<Animal> animals, int k) {
-        if (k < 0) {
+    public static List<Animal> weightDescSort(List<Animal> animalsInput, int k) {
+        if (animalsInput == null || k < 0) {
             return null;
         }
+
+        List<Animal> animals = animalsInput.stream().filter(Objects::nonNull).toList();
 
         return animals.stream().sorted((o1, o2) -> {
             if (o1.weight() < o1.weight()) {
@@ -45,28 +54,56 @@ public class Task {
     }
 
     // 3. Количество животных каждого вида
-    public static Map<Animal.Type, Long> countSpecies(List<Animal> animals) {
+    public static Map<Animal.Type, Long> countSpecies(List<Animal> animalsInput) {
+        if (animalsInput == null) {
+            return null;
+        }
+
+        List<Animal> animals = animalsInput.stream().filter(Objects::nonNull).toList();
+
         return animals.stream()
             .collect(Collectors.groupingBy(Animal::type, Collectors.counting()));
     }
 
     // 4. Животное с самым длинным именем
-    public static Animal longestName(List<Animal> animals) {
+    public static Animal longestName(List<Animal> animalsInput) {
+        if (animalsInput == null) {
+            return null;
+        }
+
+        List<Animal> animals = animalsInput.stream().filter(Objects::nonNull).toList();
+
         return animals.stream().max(Comparator.comparing(o -> o.name().length()))
             .orElse(null);
     }
 
     // 5. Каких животных больше: самок или самцов
-    public static Animal.Sex moreMaleFemale(List<Animal> animals) {
+    public static Animal.Sex moreMaleFemale(List<Animal> animalsInput) {
+        if (animalsInput == null) {
+            return null;
+        }
+
+        List<Animal> animals = animalsInput.stream().filter(Objects::nonNull).toList();
+
         Map<Animal.Sex, Long> sexCount = animals.stream()
             .collect(Collectors.groupingBy(Animal::sex, Collectors.counting()));
+
+        if (sexCount.isEmpty()) {
+            return null;
+        }
 
         return Collections.max(sexCount.entrySet(), Comparator.comparingLong(Map.Entry::getValue))
             .getKey();
     }
 
     // 6. Самое тяжёлое животное каждого вида
-    public static Map<Animal.Type, Animal> maxWeightEachSpecie(List<Animal> animals) {
+    public static Map<Animal.Type, Animal> maxWeightEachSpecie(List<Animal> animalsInput) {
+        if (animalsInput == null) {
+            return null;
+        }
+
+        List<Animal> animals = animalsInput.stream().filter(Objects::nonNull).toList();
+
         Map<Animal.Type, List<Animal>> animalsBySpecies =
             animals.stream().collect(Collectors.groupingBy(Animal::type));
 
@@ -88,8 +125,14 @@ public class Task {
     }
 
     // 7. K-е самое старое животное
-    public static Animal kOldAnimal(List<Animal> animals, int k) {
-        if (k - 1 < 0 || k - 1 >= animals.size()) {
+    public static Animal kOldAnimal(List<Animal> animalsInput, int k) {
+        if (animalsInput == null || k - 1 < 0 || k - 1 >= animalsInput.size()) {
+            return null;
+        }
+
+        List<Animal> animals = animalsInput.stream().filter(Objects::nonNull).toList();
+
+        if (animals.isEmpty()) {
             return null;
         }
 
@@ -104,42 +147,80 @@ public class Task {
     }
 
     // 8. Самое тяжёлое животное среди животных ниже k см
-    public static Animal heaviestAnimal(List<Animal> animals, int k) {
-        if (k <= 0) {
+    public static Animal heaviestAnimal(List<Animal> animalsInput, int k) {
+        if (animalsInput == null || k <= 0) {
             return null;
         }
+
+        List<Animal> animals = animalsInput.stream().filter(Objects::nonNull).toList();
 
         return animals.stream().filter(animal -> animal.height() < k)
             .max((Comparator.comparing(Animal::weight))).orElse(null);
     }
 
     // 9. Общее количество лап
-    public static Integer pawsCount(List<Animal> animals) {
+    public static Integer pawsCount(List<Animal> animalsInput) {
+        if (animalsInput == null) {
+            return null;
+        }
+
+        List<Animal> animals = animalsInput.stream().filter(Objects::nonNull).toList();
+
         return animals.stream().mapToInt(Animal::paws).sum();
     }
 
     // 10. Животные, возраст которых не совпадает с количеством лап
-    public static List<Animal> ageNotEqualsPaws(List<Animal> animals) {
+    public static List<Animal> ageNotEqualsPaws(List<Animal> animalsInput) {
+        if (animalsInput == null) {
+            return null;
+        }
+
+        List<Animal> animals = animalsInput.stream().filter(Objects::nonNull).toList();
+
         return animals.stream().filter(animal -> animal.age() != animal.paws()).toList();
     }
 
     // 11. Животные, которые могут укусить. Рост больше 100см
-    public static List<Animal> canBite(List<Animal> animals) {
+    public static List<Animal> canBite(List<Animal> animalsInput) {
+        if (animalsInput == null) {
+            return null;
+        }
+
+        List<Animal> animals = animalsInput.stream().filter(Objects::nonNull).toList();
+
         return animals.stream().filter(animal -> animal.bites() && animal.height() > 100).toList();
     }
 
     // 12. Количество животных, вес которых превышает рост
-    public static Long weightMoreHeightCount(List<Animal> animals) {
+    public static Long weightMoreHeightCount(List<Animal> animalsInput) {
+        if (animalsInput == null) {
+            return null;
+        }
+
+        List<Animal> animals = animalsInput.stream().filter(Objects::nonNull).toList();
+
         return animals.stream().filter(animal -> animal.weight() > animal.height()).count();
     }
 
     // 13. Список животных, имена которых состоят более, чем из двух слов
-    public static List<Animal> twoWordsNameAnimals(List<Animal> animals) {
+    public static List<Animal> twoWordsNameAnimals(List<Animal> animalsInput) {
+        if (animalsInput == null) {
+            return null;
+        }
+
+        List<Animal> animals = animalsInput.stream().filter(Objects::nonNull).toList();
+
         return animals.stream().filter(animal -> animal.name().split(" ").length > 2).toList();
     }
 
     // 14. Есть ли в списке собака ростом более k см
-    public static Boolean isThereHighDog(List<Animal> animals, int k) {
+    public static Boolean isThereHighDog(List<Animal> animalsInput, int k) {
+        if (animalsInput == null) {
+            return null;
+        }
+
+        List<Animal> animals = animalsInput.stream().filter(Objects::nonNull).toList();
+
         if (k <= 0) {
             return false;
         }
@@ -149,23 +230,37 @@ public class Task {
     }
 
     // 15. Суммарный вес животных каждого вида, возраст от k до l лет
-    public static Map<Animal.Type, Integer> totalWeightEverySpecie(List<Animal> animals, int k, int l) {
-        if (k < 0 || l < 0 || k > l) {
+    public static Map<Animal.Type, Integer> totalWeightEverySpecie(List<Animal> animalsInput, int k, int l) {
+        if (animalsInput == null || k < 0 || l < 0 || k > l) {
             return null;
         }
+
+        List<Animal> animals = animalsInput.stream().filter(Objects::nonNull).toList();
 
         return animals.stream().filter(animal -> animal.age() >= k && animal.age() <= l)
             .collect(Collectors.groupingBy(Animal::type, Collectors.summingInt(Animal::weight)));
     }
 
     // 16. Животные, отсортированные по виду, потому по полу, затем по имени
-    public static List<Animal> specieSexNameSort(List<Animal> animals) {
+    public static List<Animal> specieSexNameSort(List<Animal> animalsInput) {
+        if (animalsInput == null) {
+            return null;
+        }
+
+        List<Animal> animals = animalsInput.stream().filter(Objects::nonNull).toList();
+
         return animals.stream().sorted(Comparator.comparing(Animal::type)
             .thenComparing(Animal::sex).thenComparing(Animal::name)).toList();
     }
 
     // 17. Правда ли, что пауки кусаются чаще, чем собаки
-    public static Boolean spidersBiteMoreDogs(List<Animal> animals) {
+    public static Boolean spidersBiteMoreDogs(List<Animal> animalsInput) {
+        if (animalsInput == null) {
+            return null;
+        }
+
+        List<Animal> animals = animalsInput.stream().filter(Objects::nonNull).toList();
+
         Map<Animal.Type, List<Animal>> animalsBySpecies = animals.stream()
             .filter(animal -> animal.bites() && (animal.type() == Animal.Type.DOG
                 || animal.type() == Animal.Type.SPIDER))
@@ -185,14 +280,26 @@ public class Task {
 
     // 18. Самая тяжёлая рыбка
     public static Animal heaviestFish(List<List<Animal>> animalsLists) {
+        if (animalsLists == null) {
+            return null;
+        }
+
         return animalsLists.stream()
+            .filter(Objects::nonNull)
             .flatMap(Collection::stream).toList().stream()
+            .filter(Objects::nonNull)
             .filter(animal -> animal.type().equals(Animal.Type.FISH))
             .max(Comparator.comparing(Animal::weight)).orElse(null);
     }
 
     // 19. Животные с ошибками в записи
-    public static Map<String, Set<ValidationError>> invalidRecord(List<Animal> animals) {
+    public static Map<String, Set<ValidationError>> invalidRecord(List<Animal> animalsInput) {
+        if (animalsInput == null) {
+            return null;
+        }
+
+        List<Animal> animals = animalsInput.stream().filter(Objects::nonNull).toList();
+
         Animal animal = animals.stream().filter(a -> !checkAnimal(a).isEmpty())
             .findFirst().orElse(null);
 
@@ -207,7 +314,13 @@ public class Task {
     }
 
     // 20. Читабельный отчёт об ошибках
-    public static Map<String, String> beautifulResult(List<Animal> animals) {
+    public static Map<String, String> beautifulResult(List<Animal> animalsInput) {
+        if (animalsInput == null) {
+            return null;
+        }
+
+        List<Animal> animals = animalsInput.stream().filter(Objects::nonNull).toList();
+
         Animal animal = animals.stream().filter(a -> !checkAnimal(a).isEmpty())
             .findFirst().orElse(null);
 

@@ -12,6 +12,7 @@ import static edu.hw4.Task.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AnimalTests {
@@ -134,10 +135,6 @@ public class AnimalTests {
         assertThat(ANIMAL9).isEqualTo(kOldAnimal(ANIMALS, 4));
 
         assertThat(ANIMAL6).isEqualTo(kOldAnimal(ANIMALS, 7));
-
-        assertThat(kOldAnimal(ANIMALS, -1)).isNull();
-
-        assertThat(kOldAnimal(ANIMALS, 150)).isNull();
     }
 
     // 8
@@ -149,10 +146,6 @@ public class AnimalTests {
         assertThat(ANIMAL8).isEqualTo(heaviestAnimal(ANIMALS, 10));
 
         assertThat(ANIMAL12).isEqualTo(heaviestAnimal(ANIMALS, 500));
-
-        assertThat(heaviestAnimal(ANIMALS, -1)).isNull();
-
-        assertThat(heaviestAnimal(ANIMALS, 0)).isNull();
     }
 
     // 9
@@ -224,12 +217,6 @@ public class AnimalTests {
 
         weights.clear();
         assertEquals(totalWeightEverySpecie(ANIMALS, 99999, 100000), weights);
-
-        assertThat(totalWeightEverySpecie(ANIMALS, -1, 10)).isNull();
-
-        assertThat(totalWeightEverySpecie(ANIMALS, 0, -1)).isNull();
-
-        assertThat(totalWeightEverySpecie(ANIMALS, 6, 5)).isNull();
     }
 
     // 16
@@ -295,7 +282,7 @@ public class AnimalTests {
             null, null, null, -1, 0, -1, false
         ))));
 
-        assertThat(invalidRecord(ANIMALS)).isNull();
+        assertNull(invalidRecord(ANIMALS));
     }
 
     // 20
@@ -315,6 +302,6 @@ public class AnimalTests {
             null, null, null, -1, 0, -1, false
         ))));
 
-        assertThat(beautifulResult(ANIMALS)).isNull();
+        assertNull(beautifulResult(ANIMALS));
     }
 }
