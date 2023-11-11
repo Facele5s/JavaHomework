@@ -35,10 +35,13 @@ public class Task1Test {
         );
 
         assertEquals(atbash("Megamind"), "Nvtznrmw");
+
+        assertEquals(atbash("Olmwlm rh gsv xzkrgzo lu Tivzg Yirgzrm"),
+            "London is the capital of Great Britain");
     }
 
     @Test
-    @DisplayName("Проверка на шифрования на латинских символов")
+    @DisplayName("Проверка на шифрование не латинских символов")
     public void notLatinCharsTest() {
         assertEquals(atbash("Привет, мир!"), "Привет, мир!");
 
