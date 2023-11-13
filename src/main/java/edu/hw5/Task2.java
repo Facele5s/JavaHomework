@@ -3,6 +3,7 @@ package edu.hw5;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +27,14 @@ public class Task2 {
         return response;
     }
 
-    public static LocalDate getNearestFriday13(LocalDate date) {
-        return date;
+    @SuppressWarnings("MagicNumber")
+    public static LocalDate getNextFriday13(LocalDate date) {
+        LocalDate nextFriday13 = date.with(TemporalAdjusters.next(DayOfWeek.FRIDAY));
+
+        while (nextFriday13.getDayOfMonth() != 13) {
+            nextFriday13 = nextFriday13.with(TemporalAdjusters.next(DayOfWeek.FRIDAY));
+        }
+
+        return nextFriday13;
     }
 }

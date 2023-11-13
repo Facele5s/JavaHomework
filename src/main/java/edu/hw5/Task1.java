@@ -25,6 +25,6 @@ public class Task1 {
             .reduce(Duration.ZERO, Duration::plus)
             .dividedBy(sessions.size()).toMinutes();
 
-        return String.format("%d %d", duration / MINS_IN_HOUR, duration % MINS_IN_HOUR);
+        return String.format("%dч %dм", duration / MINS_IN_HOUR, duration % MINS_IN_HOUR);
     }
 }
