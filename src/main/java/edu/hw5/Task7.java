@@ -1,35 +1,22 @@
 package edu.hw5;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class Task7 {
-    private static final String PATTERN1 = "^[01]{2}0[01]*$";
-    private static final String PATTERN2 = "^((0[01]*0)|(1[01]*1)|([01]))$";
-    private static final String PATTERN3 = "^[01]{1,3}$";
-
     private Task7() {
 
     }
 
+    // содержит не менее 3 символов, причем третий символ равен 0
     public static boolean checkRegex1(String str) {
-        Pattern pattern = Pattern.compile(PATTERN1);
-        Matcher matcher = pattern.matcher(str);
-
-        return matcher.matches();
+        return str.matches("^[01]{2}0[01]*$");
     }
 
+    // начинается и заканчивается одним и тем же символом
     public static boolean checkRegex2(String str) {
-        Pattern pattern = Pattern.compile(PATTERN2);
-        Matcher matcher = pattern.matcher(str);
-
-        return matcher.matches();
+        return str.matches("^((0[01]*0)|(1[01]*1)|([01]))$");
     }
 
+    // длина не менее 1 и не более 3
     public static boolean checkRegex3(String str) {
-        Pattern pattern = Pattern.compile(PATTERN3);
-        Matcher matcher = pattern.matcher(str);
-
-        return matcher.matches();
+        return str.matches("^[01]{1,3}$");
     }
 }
