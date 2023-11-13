@@ -6,6 +6,10 @@ public class Task4 {
     }
 
     public static boolean validateStrongPassword(String str) {
+        if (str == null) {
+            return false;
+        }
+
         return str.matches(".*[~!@#$%^&*|].*");
     }
 }

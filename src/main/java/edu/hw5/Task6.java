@@ -9,6 +9,10 @@ public class Task6 {
     }
 
     public static boolean isSubstring(String s, String t) {
+        if (s == null || t == null) {
+            return false;
+        }
+
         Pattern pattern = Pattern.compile(Pattern.quote(s));
         Matcher matcher = pattern.matcher(t);
 

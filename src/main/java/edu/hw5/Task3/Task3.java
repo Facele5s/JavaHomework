@@ -4,8 +4,20 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 public class Task3 {
-    public Optional<LocalDate> parseDate(String str) {
+    private Task3() {
+
+    }
+
+    public static Optional<LocalDate> parseDate(String str) {
+        if (str == null) {
+            return Optional.empty();
+        }
+
         DateParser parser = getDatePatternType(str);
+
+        if (parser == null) {
+            return Optional.empty();
+        }
 
         LocalDate date = parser.parseDate(str);
 

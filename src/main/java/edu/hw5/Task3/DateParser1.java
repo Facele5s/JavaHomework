@@ -19,7 +19,7 @@ public class DateParser1 implements DateParser {
         pattern.append("-");
         pattern.append("M".repeat(params[1].length()));
         pattern.append("-");
-        pattern.append("y".repeat(params[2].length()));
+        pattern.append("d".repeat(params[2].length()));
 
         return pattern.toString();
     }
