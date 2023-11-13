@@ -16,12 +16,18 @@ public class Task1 {
     }
 
     public static char encode(char c) {
-        if (c >= 'A' && c <= 'Z') {
-            return (char) ('A' + 'Z' - c);
-        } else if (c >= 'a' && c <= 'z') {
-            return (char) ('a' + 'z' - c);
-        } else {
-            return c;
+        char letter = Character.toUpperCase(c);
+
+        if (letter >= 'A' && letter <= 'Z') {
+            letter = (char) ('A' + 'Z' - letter);
+
+            if (Character.isLowerCase(c)) {
+                letter = Character.toLowerCase(letter);
+            }
+
+            return letter;
         }
+
+        return c;
     }
 }
