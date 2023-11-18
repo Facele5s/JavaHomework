@@ -43,6 +43,10 @@ public class HackerNews {
     }
 
     public static String news(long id) {
+        if (id <= 0) {
+            return null;
+        }
+
         try {
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()

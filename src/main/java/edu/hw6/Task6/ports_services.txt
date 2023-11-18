@@ -53,3 +53,4 @@
 5223:XMPP
 443:VMware
 25565:Minecraft
+111:MyPortCheck

@@ -29,7 +29,7 @@ public class PortScanner {
     private static final int PORT_START = 0;
     private static final int PORT_STOP = 49151;
 
-    private static final String PORTS_SERVICES_FILEPATH = "/src/main/java/edu/hw6/Task6/ports_services.txt";
+    private static final String PORTS_SERVICES_FILEPATH = "src/main/java/edu/hw6/Task6/ports_services.txt";
 
     private static final Map<Integer, String> SERVICES = new HashMap<>();
 
@@ -81,7 +81,7 @@ public class PortScanner {
         });
     }
 
-    static class Port {
+    public static class Port {
         private final int port;
         private final String protocol;
         private final String service;
