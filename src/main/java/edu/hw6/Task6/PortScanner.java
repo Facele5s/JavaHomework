@@ -96,18 +96,6 @@ public class PortScanner {
                 service = SERVICES.get(port);
             }
         }
-
-        public int getPort() {
-            return port;
-        }
-
-        public String getProtocol() {
-            return protocol;
-        }
-
-        public String getService() {
-            return service;
-        }
     }
 
 }
