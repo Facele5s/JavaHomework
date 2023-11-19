@@ -40,11 +40,15 @@ public class TablePrinter {
     }
 
     private static String centerString(String str, int width) {
-        int offset = Math.max(width - str.length(), 0);
+        int strLength = str == null ? 1 : str.length();
+
+        int offset = Math.max(width - strLength, 0);
         int leftOffset = offset / 2;
         int rightOffset = offset - offset / 2;
 
-        return " ".repeat(leftOffset) + str + " ".repeat(rightOffset);
+        String correctString = str == null ? "-" : str;
+
+        return " ".repeat(leftOffset) + correctString + " ".repeat(rightOffset);
     }
 
     private static int[] calculateWidths(String[] header, String[][] table) {
@@ -55,7 +59,12 @@ public class TablePrinter {
             int maxWidth = header[i].length();
 
             for (String[] row: table) {
-                int width = row[i].length();
+                int width;
+                if (row[i] == null) {
+                    width = 1;
+                } else {
+                    width = row[i].length();
+                }
                 if (width > maxWidth) {
                     maxWidth = width;
                 }
