@@ -43,8 +43,8 @@ public class LogAnalyzer {
             .sum() / correctLogs.size();
     }
 
-    private boolean isBetweenDates(LocalDate date, LocalDate from, LocalDate to) {
-        return ((date.isAfter(from) || date.isEqual(from) || from == null)
-            && (date.isBefore(to) || date.isEqual(to) || to == null));
+    public static boolean isBetweenDates(LocalDate date, LocalDate from, LocalDate to) {
+        return ((from == null || date.isAfter(from) || date.isEqual(from))
+            && (to == null || date.isBefore(to) || date.isEqual(to)));
     }
 }

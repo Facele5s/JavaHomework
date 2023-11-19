@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 
 public class LogParser {
     private static final Pattern LOG_PATTERN = Pattern.compile(
-        "^([\\d.]+) - - \\[(.*)] \"(\\S+ \\S+ \\S+)\" (\\d+) (\\d+) \"(\\S+)\" \"\\S+\"$"
+        "^([\\d.]+) - - \\[(.*)] \"(\\S+ \\S+ \\S+)\" (\\d+) (\\d+) \"(\\S+)\" \"(\\S+)\"$"
     );
 
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(
