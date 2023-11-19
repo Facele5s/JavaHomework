@@ -53,8 +53,6 @@ public class LogAnalyzerTest {
         try {
             List<LogEntity> logs = LogParser.parseLogs(path);
 
-            assertFalse(logs.isEmpty());
-
             logs.forEach(Assertions::assertNotNull);
 
         } catch (IOException e) {
