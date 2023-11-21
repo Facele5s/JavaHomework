@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class Task3Test {
     @Test
     @DisplayName("Проверка формата yyyy-MM-dd")
-    public void format1ParseTest() {
+    public void ymdFormatParseTest() {
         Optional<LocalDate> expected = Optional.of(LocalDate.of(2020, 10, 10));
 
         assertEquals(expected, parseDate("2020-10-10"));
@@ -22,7 +22,7 @@ public class Task3Test {
 
     @Test
     @DisplayName("Проверка формата dd/MM/yyyy")
-    public void format2ParseTest() {
+    public void dmyFormatParseTest() {
         Optional<LocalDate> expected = Optional.of(LocalDate.of(1976, 3, 1));
 
         assertEquals(expected, parseDate("1/3/1976"));
@@ -34,7 +34,7 @@ public class Task3Test {
 
     @Test
     @DisplayName("Проверка относительной даты (словесно)")
-    public void format3ParseTest() {
+    public void wordRelativeFormatParseTest() {
         Optional<LocalDate> expected = Optional.of(LocalDate.now().plusDays(1));
 
         assertEquals(expected, parseDate("tomorrow"));
@@ -50,7 +50,7 @@ public class Task3Test {
 
     @Test
     @DisplayName("Проверка относительной даты (численно)")
-    public void format4ParseTest() {
+    public void numberRelativeFormatParseTest() {
         Optional<LocalDate> expected = Optional.of(LocalDate.now().minusDays(1));
 
         assertEquals(expected, parseDate("1 day ago"));

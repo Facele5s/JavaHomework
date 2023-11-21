@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class Task6Test {
     @Test
-    @DisplayName("Проверка на вхождение одной строку в другую")
+    @DisplayName("Проверка на вхождение одной строки в другую")
     public void substringTest() {
         assertTrue(isSubstring("abc", "achfdbaabgabcaabg"));
         assertTrue(isSubstring("is", "London is the capital"));
