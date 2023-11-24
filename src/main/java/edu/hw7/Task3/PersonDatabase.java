@@ -1,13 +1,14 @@
 package edu.hw7.Task3;
 
 import java.util.List;
+import java.util.Set;
 
 public interface PersonDatabase {
     void add(Person person);
 
     void delete(int id);
 
-    List<Person> getAll();
+    Set<Person> getAll();
 
     Person findById(int id);
 

@@ -1,13 +1,14 @@
 package edu.hw7.Task3;
 
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class RWLockDatabase extends SimpleDatabase {
     private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
     @Override
-    public List<Person> getAll() {
+    public Set<Person> getAll() {
         lock.readLock().lock();
 
         try {

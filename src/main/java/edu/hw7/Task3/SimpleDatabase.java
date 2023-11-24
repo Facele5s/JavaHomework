@@ -2,8 +2,10 @@ package edu.hw7.Task3;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class SimpleDatabase implements PersonDatabase {
     private final Map<Integer, Person> idPersons = new HashMap<>();
@@ -12,8 +14,8 @@ public class SimpleDatabase implements PersonDatabase {
     private final Map<String, Person> phonePersons = new HashMap<>();
 
     @Override
-    public List<Person> getAll() {
-        return new ArrayList<>(idPersons.values());
+    public Set<Person> getAll() {
+        return new HashSet<>(idPersons.values());
     }
 
     @Override

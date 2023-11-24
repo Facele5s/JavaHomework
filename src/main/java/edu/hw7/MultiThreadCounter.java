@@ -13,13 +13,6 @@ public class MultiThreadCounter {
         this.n = n;
     }
 
-    public synchronized void increment() {
-        if (count.get() < n) {
-            count.incrementAndGet();
-            LOGGER.info(Thread.currentThread().getName() + ": " + count.get());
-        }
-    }
-
     public void startCounting(int threads) {
         for (int i = 0; i < threads; i++) {
             Thread thread = new Thread(() -> {
@@ -30,5 +23,16 @@ public class MultiThreadCounter {
 
             thread.start();
         }
+    }
+
+    public synchronized void increment() {
+        if (count.get() < n) {
+            count.incrementAndGet();
+            LOGGER.info(Thread.currentThread().getName() + ": " + count.get());
+        }
+    }
+
+    public AtomicInteger getCount() {
+        return count;
     }
 }
