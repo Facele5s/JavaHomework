@@ -9,6 +9,10 @@ public class StatsCalculator {
     }
 
     public static Double getMetric(String metricType, double[] data) {
+        if (data == null) {
+            return null;
+        }
+
         return switch (metricType.toLowerCase()) {
             case "sum" -> getSum(data);
             case "avg" -> getAverage(data);
