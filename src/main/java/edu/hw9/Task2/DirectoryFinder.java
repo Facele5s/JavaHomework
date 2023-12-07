@@ -31,6 +31,7 @@ public class DirectoryFinder extends RecursiveTask<List<Path>> {
             Files.list(currentPath).forEach(thing -> {
                 if (Files.isDirectory(thing)) {
                     directories.add(new DirectoryFinder(thing));
+                    directories.getLast().fork();
                 } else {
                     fileCount.getAndIncrement();
                 }

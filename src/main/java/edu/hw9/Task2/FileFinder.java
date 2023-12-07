@@ -32,6 +32,7 @@ public class FileFinder extends RecursiveTask<List<Path>> {
             Files.list(currentPath).forEach(thing -> {
                 if (Files.isDirectory(thing)) {
                     directories.add(new DirectoryFinder(thing));
+                    directories.getLast().fork();
                 } else {
                     if (predicates.stream().allMatch(predicate -> predicate.test(thing))) {
                         response.add(thing);
