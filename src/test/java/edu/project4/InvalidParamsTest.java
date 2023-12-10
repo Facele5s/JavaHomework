@@ -45,5 +45,11 @@ public class InvalidParamsTest {
         } catch (IllegalArgumentException e) {
             assertTrue(true);
         }
+
+        try {
+            GammaCorrector.correctGamma(null);
+        } catch (IllegalArgumentException e) {
+            assertTrue(true);
+        }
     }
 }

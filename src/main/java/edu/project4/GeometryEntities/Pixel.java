@@ -7,6 +7,7 @@ public class Pixel {
     private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
     private Color color = Color.BLACK;
     private int hitCount = 0;
+    private double normal = 0;
 
     public void adjustColor(Color color) {
         lock.writeLock().lock();
@@ -28,7 +29,23 @@ public class Pixel {
         }
     }
 
+    public int getHitCount() {
+        return hitCount;
+    }
+
     public Color getColor() {
         return color;
+    }
+
+    public double getNormal() {
+        return normal;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public void setNormal(double normal) {
+        this.normal = normal;
     }
 }
