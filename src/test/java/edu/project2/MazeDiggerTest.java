@@ -1,10 +1,10 @@
 package edu.project2;
 
-import edu.project2.Exceptions.WrongCellException;
-import edu.project2.Exceptions.WrongSizeException;
-import edu.project2.Maze_creation.ControlledRandom;
-import edu.project2.Maze_creation.MazeDigger;
-import edu.project2.Maze_structure.Maze;
+import edu.project2.maze.exceptions.WrongCellException;
+import edu.project2.maze.exceptions.WrongSizeException;
+import edu.project2.maze.creation.ControlledRandom;
+import edu.project2.maze.creation.MazeDigger;
+import edu.project2.maze.structure.Maze;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;

@@ -1,4 +1,4 @@
-package edu.project2.Maze_structure;
+package edu.project2.maze.structure;
 
 import java.util.Objects;
 
@@ -52,12 +52,12 @@ public class Cell {
     @Override
     public String toString() {
         if (!isDug) {
-            return "■";
+            return "⏹ ";
         }
         if (isPath) {
-            return "▣";
+            return "▣ ";
         }
 
-        return "□";
+        return "▢ ";
     }
 }

@@ -1,12 +1,11 @@
 package edu.project2;
 
-import edu.project2.Exceptions.WrongCellException;
-import edu.project2.Exceptions.WrongSizeException;
-import edu.project2.Maze_creation.ControlledRandom;
-import edu.project2.Maze_creation.MazeDigger;
-import edu.project2.Maze_solution.MazePathFinder;
-import edu.project2.Maze_structure.Cell;
-import edu.project2.Maze_structure.Maze;
+import edu.project2.maze.exceptions.WrongCellException;
+import edu.project2.maze.exceptions.WrongSizeException;
+import edu.project2.maze.creation.ControlledRandom;
+import edu.project2.maze.creation.MazeDigger;
+import edu.project2.maze.structure.Cell;
+import edu.project2.maze.structure.Maze;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.util.List;
@@ -24,7 +23,7 @@ public class PathFinderTest {
         MazePathFinder pathFinder = new MazePathFinder(maze);
         Cell start = maze.getCell(1, 1);
         Cell finish = maze.getCell(maze.getWidth() - 2, maze.getHeight() - 2);
-        pathFinder.findPath(start, finish);
+        pathFinder.markPath(start, finish);
 
         List<Integer> xCoordinates = List.of(
             1, 2, 3, 4, 5, 5, 5, 6, 7, 7, 7, 7, 7
@@ -48,7 +47,7 @@ public class PathFinderTest {
         MazePathFinder pathFinder = new MazePathFinder(maze);
         Cell start = maze.getCell(1, 1);
         Cell finish = maze.getCell(maze.getWidth() - 2, maze.getHeight() - 2);
-        pathFinder.findPath(start, finish);
+        pathFinder.markPath(start, finish);
 
         List<Integer> xCoordinates = List.of(
             1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 9, 10, 11, 11, 11, 12, 13, 13, 13
@@ -72,7 +71,7 @@ public class PathFinderTest {
         MazePathFinder pathFinder = new MazePathFinder(maze);
         Cell start = maze.getCell(1, 1);
         Cell finish = maze.getCell(maze.getWidth() - 2, maze.getHeight() - 2);
-        pathFinder.findPath(start, finish);
+        pathFinder.markPath(start, finish);
 
         List<Integer> xCoordinates = List.of(
             1, 1, 1, 1, 1, 1, 1, 2, 3, 3, 3, 3, 3, 4, 5

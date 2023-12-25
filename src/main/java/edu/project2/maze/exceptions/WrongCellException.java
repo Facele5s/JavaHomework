@@ -1,4 +1,4 @@
-package edu.project2.Exceptions;
+package edu.project2.maze.exceptions;
 
 public class WrongCellException extends Exception {
     public WrongCellException(int x, int y) {

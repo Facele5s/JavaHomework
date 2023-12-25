@@ -1,29 +1,18 @@
-package edu.project2.Maze_structure;
+package edu.project2.maze.structure;
 
-import edu.project2.Exceptions.WrongCellException;
-import edu.project2.Exceptions.WrongSizeException;
+import edu.project2.maze.exceptions.WrongCellException;
+import edu.project2.maze.exceptions.WrongSizeException;
 
-public class Maze implements Labyrinth {
+public class Maze {
     private final Cell[][] grid;
     private final int width;
     private final int height;
 
     public Maze(int width, int height) throws WrongSizeException {
-        if (width < 2 || height < 2) {
-            throw new WrongSizeException(width, height);
-        }
+        validateSize(width, height);
 
-        if (width % 2 == 0) {
-            this.width = width + 1;
-        } else {
-            this.width = width;
-        }
-
-        if (height % 2 == 0) {
-            this.height = height + 1;
-        } else {
-            this.height = height;
-        }
+        this.width = adjustSize(width);
+        this.height = adjustSize(height);
 
         grid = new Cell[this.height][this.width];
 
@@ -42,17 +31,14 @@ public class Maze implements Labyrinth {
         return height;
     }
 
-    @Override
     public boolean canGoToCell(int x, int y) {
         return (x > 0 && x < width - 1 && y > 0 && y < height - 1);
     }
 
-    @Override
     public boolean isCellCorrect(int x, int y) {
         return (x >= 0 && x < width && y >= 0 && y < height);
     }
 
-    @Override
     public Cell getCell(int x, int y) throws WrongCellException {
         if (!isCellCorrect(x, y)) {
             throw new WrongCellException(x, y);
@@ -61,7 +47,6 @@ public class Maze implements Labyrinth {
         return grid[y][x];
     }
 
-    @Override
     public int[][] getStructure() {
         int[][] structure = new int[height][width];
 
@@ -76,5 +61,19 @@ public class Maze implements Labyrinth {
         }
 
         return structure;
+    }
+
+    private int adjustSize(int size) {
+        if (size % 2 == 0) {
+            return size + 1;
+        }
+
+        return size;
+    }
+
+    private void validateSize(int width, int height) throws WrongSizeException {
+        if (width < 2 || height < 2) {
+            throw new WrongSizeException(width, height);
+        }
     }
 }

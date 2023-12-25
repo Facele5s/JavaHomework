@@ -1,4 +1,4 @@
-package edu.project2.Exceptions;
+package edu.project2.maze.exceptions;
 
 public class WrongSizeException extends Exception {
     public WrongSizeException(int width, int height) {

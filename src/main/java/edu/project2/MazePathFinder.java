@@ -1,8 +1,8 @@
-package edu.project2.Maze_solution;
+package edu.project2;
 
-import edu.project2.Exceptions.WrongCellException;
-import edu.project2.Maze_structure.Cell;
-import edu.project2.Maze_structure.Maze;
+import edu.project2.maze.exceptions.WrongCellException;
+import edu.project2.maze.structure.Cell;
+import edu.project2.maze.structure.Maze;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
-public class MazePathFinder implements PathFinder {
+public class MazePathFinder {
     private final Maze maze;
     private List<Integer> xCoordinates;
     private List<Integer> yCoordinates;
@@ -29,8 +29,7 @@ public class MazePathFinder implements PathFinder {
     }
 
     // Поиск в ширину
-    @Override
-    public void findPath(Cell startCell, Cell finish) throws WrongCellException {
+    public void markPath(Cell startCell, Cell finish) throws WrongCellException {
         Cell finishCell = finish;
 
         Map<Cell, Cell> pathCells = new HashMap<>();
@@ -76,7 +75,6 @@ public class MazePathFinder implements PathFinder {
         Collections.reverse(yCoordinates);
     }
 
-    @Override
     public List<Cell> getNearestCells(Cell current) throws WrongCellException {
         int[] dx = new int[] {-1, 1, 0, 0};
         int[] dy = new int[] {0, 0, -1, 1};

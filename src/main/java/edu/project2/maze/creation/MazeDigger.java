@@ -1,14 +1,14 @@
-package edu.project2.Maze_creation;
+package edu.project2.maze.creation;
 
-import edu.project2.Exceptions.WrongCellException;
-import edu.project2.Maze_structure.Cell;
-import edu.project2.Maze_structure.Maze;
+import edu.project2.maze.exceptions.WrongCellException;
+import edu.project2.maze.structure.Cell;
+import edu.project2.maze.structure.Maze;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 
-public class MazeDigger implements Digger {
+public class MazeDigger {
     private static final int[] DX = new int[] {-2, 2, 0, 0};
     private static final int[] DY = new int[] {0, 0, -2, 2};
 
@@ -20,13 +20,12 @@ public class MazeDigger implements Digger {
         this.random = random;
     }
 
-    @Override
     public void digMaze() throws WrongCellException {
         Cell current = maze.getCell(1, 1);
         Stack<Cell> cells = new Stack<>();
 
         while (true) {
-            Cell next = getRandomCell(current);
+            Cell next = getRandomNeighbour(current);
 
             if (next != null) {
                 digCell(next);
@@ -42,13 +41,11 @@ public class MazeDigger implements Digger {
         }
     }
 
-    @Override
     public void digCell(Cell cell) {
         cell.dig();
     }
 
-    @Override
-    public Cell getRandomCell(Cell current) throws WrongCellException {
+    public Cell getRandomNeighbour(Cell current) throws WrongCellException {
         List<Cell> availableCells = new ArrayList<>();
 
         for (int i = 0; i < DX.length; i++) {
@@ -70,7 +67,6 @@ public class MazeDigger implements Digger {
         return availableCells.get(random.nextInt(availableCells.size()));
     }
 
-    @Override
     public Cell getMiddleCell(Cell cell1, Cell cell2) throws WrongCellException {
         return maze.getCell(
             (cell1.getX() + cell2.getX()) / 2,

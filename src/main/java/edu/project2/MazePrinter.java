@@ -1,16 +1,15 @@
-package edu.project2.Maze_output;
+package edu.project2;
 
-import edu.project2.Exceptions.WrongCellException;
-import edu.project2.Maze_structure.Maze;
+import edu.project2.maze.exceptions.WrongCellException;
+import edu.project2.maze.structure.Maze;
 
-public class MazePrinter implements Printer {
+public class MazePrinter {
     private final Maze maze;
 
     public MazePrinter(Maze maze) {
         this.maze = maze;
     }
 
-    @Override
     @SuppressWarnings("RegexpSinglelineJava")
     public void printMaze() throws WrongCellException {
         for (int y = 0; y < maze.getHeight(); y++) {

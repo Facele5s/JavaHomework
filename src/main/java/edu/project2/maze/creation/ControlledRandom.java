@@ -1,4 +1,4 @@
-package edu.project2.Maze_creation;
+package edu.project2.maze.creation;
 
 import java.util.Random;
 
