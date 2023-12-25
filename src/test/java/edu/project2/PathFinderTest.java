@@ -23,7 +23,7 @@ public class PathFinderTest {
         MazePathFinder pathFinder = new MazePathFinder(maze);
         Cell start = maze.getCell(1, 1);
         Cell finish = maze.getCell(maze.getWidth() - 2, maze.getHeight() - 2);
-        pathFinder.markPath(start, finish);
+        pathFinder.findPath(start, finish);
 
         List<Integer> xCoordinates = List.of(
             1, 2, 3, 4, 5, 5, 5, 6, 7, 7, 7, 7, 7
@@ -47,7 +47,7 @@ public class PathFinderTest {
         MazePathFinder pathFinder = new MazePathFinder(maze);
         Cell start = maze.getCell(1, 1);
         Cell finish = maze.getCell(maze.getWidth() - 2, maze.getHeight() - 2);
-        pathFinder.markPath(start, finish);
+        pathFinder.findPath(start, finish);
 
         List<Integer> xCoordinates = List.of(
             1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 9, 10, 11, 11, 11, 12, 13, 13, 13
@@ -71,7 +71,7 @@ public class PathFinderTest {
         MazePathFinder pathFinder = new MazePathFinder(maze);
         Cell start = maze.getCell(1, 1);
         Cell finish = maze.getCell(maze.getWidth() - 2, maze.getHeight() - 2);
-        pathFinder.markPath(start, finish);
+        pathFinder.findPath(start, finish);
 
         List<Integer> xCoordinates = List.of(
             1, 1, 1, 1, 1, 1, 1, 2, 3, 3, 3, 3, 3, 4, 5

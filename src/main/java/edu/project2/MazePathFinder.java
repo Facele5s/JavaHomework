@@ -29,13 +29,12 @@ public class MazePathFinder {
     }
 
     // Поиск в ширину
-    public void markPath(Cell startCell, Cell finish) throws WrongCellException {
+    public List<Cell> findPath(Cell startCell, Cell finish) throws WrongCellException {
         Cell finishCell = finish;
 
         Map<Cell, Cell> pathCells = new HashMap<>();
         Queue<Cell> cellsQueue = new LinkedList<>();
 
-        startCell.setAsPath();
         pathCells.put(startCell, null);
         cellsQueue.add(startCell);
 
@@ -59,23 +58,28 @@ public class MazePathFinder {
         xCoordinates = new ArrayList<>();
         yCoordinates = new ArrayList<>();
 
+        List<Cell> path = new ArrayList<>();
+
         while (!startCell.equals(finishCell)) {
-            finishCell.setAsPath();
+            path.add(finishCell);
 
             xCoordinates.add(finishCell.getX());
             yCoordinates.add(finishCell.getY());
 
             finishCell = pathCells.get(finishCell);
         }
+        path.add(finishCell);
 
         xCoordinates.add(startCell.getX());
         yCoordinates.add(startCell.getY());
 
         Collections.reverse(xCoordinates);
         Collections.reverse(yCoordinates);
+
+        return path.reversed();
     }
 
-    public List<Cell> getNearestCells(Cell current) throws WrongCellException {
+    private List<Cell> getNearestCells(Cell current) throws WrongCellException {
         int[] dx = new int[] {-1, 1, 0, 0};
         int[] dy = new int[] {0, 0, -1, 1};
 

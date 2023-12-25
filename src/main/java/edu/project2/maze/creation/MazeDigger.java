@@ -45,7 +45,7 @@ public class MazeDigger {
         cell.dig();
     }
 
-    public Cell getRandomNeighbour(Cell current) throws WrongCellException {
+    private Cell getRandomNeighbour(Cell current) throws WrongCellException {
         List<Cell> availableCells = new ArrayList<>();
 
         for (int i = 0; i < DX.length; i++) {
@@ -67,7 +67,7 @@ public class MazeDigger {
         return availableCells.get(random.nextInt(availableCells.size()));
     }
 
-    public Cell getMiddleCell(Cell cell1, Cell cell2) throws WrongCellException {
+    private Cell getMiddleCell(Cell cell1, Cell cell2) throws WrongCellException {
         return maze.getCell(
             (cell1.getX() + cell2.getX()) / 2,
             (cell1.getY() + cell2.getY()) / 2

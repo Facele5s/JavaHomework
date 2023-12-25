@@ -6,7 +6,6 @@ public class Cell {
     private final int x;
     private final int y;
     private boolean isDug;
-    private boolean isPath;
 
     public Cell(int x, int y) {
         this.x = x;
@@ -29,10 +28,6 @@ public class Cell {
         isDug = true;
     }
 
-    public void setAsPath() {
-        isPath = true;
-    }
-
     @Override public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -47,17 +42,5 @@ public class Cell {
     @Override
     public int hashCode() {
         return Objects.hash(x, y);
-    }
-
-    @Override
-    public String toString() {
-        if (!isDug) {
-            return "⏹ ";
-        }
-        if (isPath) {
-            return "▣ ";
-        }
-
-        return "▢ ";
     }
 }
