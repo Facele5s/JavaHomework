@@ -5,8 +5,6 @@ import edu.project4.GeometryEntities.Pixel;
 import edu.project4.GeometryEntities.Point;
 import edu.project4.Transformations.AffineTransformation;
 import edu.project4.Transformations.Transformation;
-import java.awt.Color;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
@@ -30,7 +28,7 @@ public class FractalRenderer {
 
         this.nThreads = nThreads;
         this.executor = Executors.newFixedThreadPool(this.nThreads);
-        this.affines = generateAffines(nAffines);
+        this.affines = AffineTransformation.generateAffines(nAffines);
     }
 
     public void render(
@@ -84,7 +82,7 @@ public class FractalRenderer {
         executor.close();
     }
 
-    private List<AffineTransformation> generateAffines(int nAffines) {
+    /*private List<AffineTransformation> generateAffines(int nAffines) {
         List<AffineTransformation> affinesGenerated = new ArrayList<>();
 
         for (int i = 0; i < nAffines; i++) {
@@ -118,6 +116,6 @@ public class FractalRenderer {
     private boolean checkAffineParams(double a, double b, double d, double e) {
         return (a * a + d * d < 1) && (b * b + e * e < 1)
             && (a * a + b * b + d * d + e * e < 1 + Math.pow((a * e - b * d), 2));
-    }
+    }*/
 
 }
