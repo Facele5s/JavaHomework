@@ -6,36 +6,37 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashSet;
 import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class Task3Test {
-    private static final String DIRECTORY = "src/main/java/edu/hw6/Task3";
+    private static final String DIRECTORY = "src/main/resources";
     private static final Path PATH = Path.of(DIRECTORY);
     private static final Path TEXT1 = Path.of(DIRECTORY + "/123.txt");
     private static final Path TEXT2 = Path.of(DIRECTORY + "/text1.txt");
     private static final Path TEXT3 = Path.of(DIRECTORY + "/text2.txt");
     private static final Path IMAGE = Path.of(DIRECTORY + "/image.png");
-    private static final Path JAVA1 = Path.of(DIRECTORY + "/Filters.java");
-    private static final Path JAVA2 = Path.of(DIRECTORY + "/AbstractFilter.java");
+    private static final Path JAVA1 = Path.of(DIRECTORY + "/Javafile2.java");
+    private static final Path JAVA2 = Path.of(DIRECTORY + "/Javafile1.java");
 
     @Test
     @DisplayName("Фильтр по атрибутам файла")
     public void attributesFilterTest() throws IOException {
         Set<Path> paths = Set.of(TEXT1, TEXT2, TEXT3, JAVA1, JAVA2, IMAGE);
 
-        Files.newDirectoryStream(PATH, Filters.REGULAR_FILE).forEach(path -> {
-            assertTrue(paths.contains(path));
-        });
+        Set<Path> pathSet = new HashSet<>();
+        Files.newDirectoryStream(PATH, Filters.REGULAR_FILE).forEach(pathSet::add);
+        assertTrue(pathSet.containsAll(paths));
 
-        Files.newDirectoryStream(PATH, Filters.READABLE).forEach(path -> {
-            assertTrue(paths.contains(path));
-        });
+        pathSet.clear();
+        Files.newDirectoryStream(PATH, Filters.READABLE).forEach(pathSet::add);
+        assertTrue(pathSet.containsAll(paths));
 
-        Files.newDirectoryStream(PATH, Filters.WRITABLE).forEach(path -> {
-            assertTrue(paths.contains(path));
-        });
+        pathSet.clear();
+        Files.newDirectoryStream(PATH, Filters.WRITABLE).forEach(pathSet::add);
+        assertTrue(pathSet.containsAll(paths));
     }
 
     @Test
@@ -44,13 +45,13 @@ public class Task3Test {
         Set<Path> smallFiles = Set.of(IMAGE, TEXT1);
         Set<Path> hugeFiles = Set.of(JAVA1, JAVA2);
 
-        Files.newDirectoryStream(PATH, Filters.largerThan(100)).forEach(path -> {
-            assertTrue(hugeFiles.contains(path));
-        });
+        Set<Path> pathSet = new HashSet<>();
+        Files.newDirectoryStream(PATH, Filters.largerThan(100)).forEach(pathSet::add);
+        assertTrue(pathSet.containsAll(hugeFiles));
 
-        Files.newDirectoryStream(PATH, Filters.smallerThan(1)).forEach(path -> {
-            assertTrue(smallFiles.contains(path));
-        });
+        pathSet.clear();
+        Files.newDirectoryStream(PATH, Filters.smallerThan(1)).forEach(pathSet::add);
+        assertTrue(pathSet.containsAll(smallFiles));
     }
 
     @Test

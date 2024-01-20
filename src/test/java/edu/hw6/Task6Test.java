@@ -1,6 +1,5 @@
 package edu.hw6;
 
-import edu.hw6.Task6.PortScanner;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.util.List;

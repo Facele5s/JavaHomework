@@ -18,10 +18,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class Task1Test {
-    private static final String DISKMAP_FILE_NOT_EXISTS = "src/main/java/edu/hw6/Task1/Diskmap_NOT_EXISTS.txt";
-    private static final String DISKMAP_FILE_WRONG_FORMAT = "src/main/java/edu/hw6/Task1/Diskmap_WRONG_FORMAT.txt";
-    private static final String DISKMAP_FILE_CORRECT = "src/main/java/edu/hw6/Task1/Diskmap_CORRECT.txt";
-    private static final String DISKMAP_FILE = "src/main/java/edu/hw6/Task1/Diskmap.txt";
+    private static final String DISKMAP_FILE_NOT_EXISTS = "src/main/resources/Diskmap_NOT_EXISTS.txt";
+    private static final String DISKMAP_FILE_WRONG_FORMAT = "src/main/resources/Diskmap_WRONG_FORMAT.txt";
+    private static final String DISKMAP_FILE_CORRECT = "src/main/resources/Diskmap_CORRECT.txt";
+    private static final String DISKMAP_FILE = "src/main/resources/Diskmap.txt";
 
     @Test
     @DisplayName("Проверка инициализации DiskMap")

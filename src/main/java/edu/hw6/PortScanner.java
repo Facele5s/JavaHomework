@@ -1,4 +1,4 @@
-package edu.hw6.Task6;
+package edu.hw6;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -29,7 +29,7 @@ public class PortScanner {
     private static final int PORT_START = 0;
     private static final int PORT_STOP = 49151;
 
-    private static final String PORTS_SERVICES_FILEPATH = "src/main/java/edu/hw6/Task6/ports_services.txt";
+    private static final String PORTS_SERVICES_FILEPATH = "src/main/resources/ports_services.txt";
 
     private static final Map<Integer, String> SERVICES = new HashMap<>();
 
